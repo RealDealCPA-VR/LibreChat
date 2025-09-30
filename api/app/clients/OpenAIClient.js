@@ -48,6 +48,7 @@ const { logger } = require('~/config');
 class OpenAIClient extends BaseClient {
   constructor(apiKey, options = {}) {
     super(apiKey, options);
+    console.log('[OpenAIClient] INIT endpoint:', options.endpoint, 'apiKey:', apiKey, 'options:', options);
     this.contextStrategy = options.contextStrategy
       ? options.contextStrategy.toLowerCase()
       : 'discard';
@@ -657,6 +658,7 @@ class OpenAIClient extends BaseClient {
           },
         }),
       };
+      console.log('[OpenAIClient] baseOptions.headers:', configOptions.baseOptions.headers);
     }
 
     if (this.options.proxy) {

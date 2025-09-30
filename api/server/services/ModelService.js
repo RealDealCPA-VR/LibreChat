@@ -79,7 +79,7 @@ const fetchModels = async ({
         'x-api-key': apiKey,
         'anthropic-version': process.env.ANTHROPIC_VERSION || '2023-06-01',
       };
-    } else {
+    } else if (apiKey) {
       options.headers.Authorization = `Bearer ${apiKey}`;
     }
 
@@ -95,6 +95,7 @@ const fetchModels = async ({
     if (user && userIdQuery) {
       url.searchParams.append('user', user);
     }
+    console.log('fetchModels headers:', options.headers, 'url:', url.toString());
     const res = await axios.get(url.toString(), options);
 
     /** @type {z.infer<typeof inputSchema>} */
